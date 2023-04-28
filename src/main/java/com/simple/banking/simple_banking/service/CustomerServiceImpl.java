@@ -5,6 +5,7 @@ import com.simple.banking.simple_banking.dto.TransferRequest;
 import com.simple.banking.simple_banking.model.Customer;
 import com.simple.banking.simple_banking.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -16,6 +17,23 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Override
+    public Map<String, Object> updateData(int id, CustomerDto CustomerDto) {
+        var updateCustomer = customerRepository.findById(id);
+        Map<String, Object> result = new HashMap<>();
+        if(updateCustomer.get() == null ){
+            result.put("id tidak ditemukan" , updateCustomer.get().getId());
+            return result;
+        }
+        updateCustomer.get().setPhone(CustomerDto.getPhone());
+        updateCustomer.get().setName(CustomerDto.getName());
+        updateCustomer.get().setAlamat(CustomerDto.getAlamat());
+        customerRepository.save(updateCustomer.get());
+        result.put("Status " , HttpStatus.OK);
+        result.put("Messages" ,updateCustomer.get());
+        return result;
+    }
 
     @Override
     public Map<String, Object> createNasabah(CustomerDto customerDto) {
