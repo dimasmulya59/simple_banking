@@ -73,8 +73,7 @@ public class CustomerServiceImpl implements CustomerService{
         try {
             Customer customer = customerRepository.findByNoRekening(transferRequest.getNoRekening());
             Customer customer2 = customerRepository.findByNoRekening(transferRequest.getNoRekening2());
-            if(customer.getNoRekening().equalsIgnoreCase(customer2.getNoRekening())) {
-                result.put("status", "failed");
+            if(customer.getNoRekening().equalsIgnoreCase(customer2.getNoRekening())) {result.put("status", "failed");
                 result.put("message", "Tidak bisa transfer ke rekening sendiri");
                 return result;
             }
@@ -109,5 +108,25 @@ public class CustomerServiceImpl implements CustomerService{
             result.put("message", "Gagal transfer");
             return result;
         }
+    }
+
+    // nih lu buat sekarang update saldo nanti gua bantu di close gak time vievernya
+    // gausah
+    //oke langsung
+    // iye nyuk
+
+    @Override
+    public Map<String , Object> updateSaldo(int id,CustomerDto customerDto){
+        var updateCustomer =  customerRepository.findById(id);
+        Map<String,Object> result =  new HashMap<>();
+        if (updateCustomer.get()== null){
+            result.put("id error" ,updateCustomer.get().getId());
+            return result;
+        }
+        updateCustomer.get().setSaldo(updateCustomer.get().getSaldo() + customerDto.getSaldo());
+        result.put("Success", HttpStatus.OK);
+        result.put("Message", "Saldo ditambahkan menjadi " + updateCustomer.get().getSaldo());
+        customerRepository.save(updateCustomer.get());
+        return result;
     }
 }

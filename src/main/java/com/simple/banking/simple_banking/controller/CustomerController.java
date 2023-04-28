@@ -31,4 +31,9 @@ public class CustomerController {
     public Map<String, Object> updateData (@PathVariable("id")int id ,@RequestBody CustomerDto CustomerDto){
         return customerService.updateData(id, CustomerDto);
     }
+
+    @PutMapping("/updateSaldo/{id}")
+    public Map<String,Object > updateSaldo (@PathVariable("id")int id ,@RequestBody CustomerDto CustomerDto){
+        return customerService.updateSaldo(id, CustomerDto);
+    }
 }

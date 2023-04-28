@@ -12,4 +12,5 @@ public interface CustomerService {
 
     Map<String,Object> transferSaldo(TransferRequest transferRequest);
 
+    Map<String , Object> updateSaldo(int id, CustomerDto customerDto);
 }
