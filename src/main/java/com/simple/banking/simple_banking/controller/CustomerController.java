@@ -2,12 +2,14 @@ package com.simple.banking.simple_banking.controller;
 
 import com.simple.banking.simple_banking.dto.CustomerDto;
 import com.simple.banking.simple_banking.dto.TransferRequest;
+import com.simple.banking.simple_banking.model.Customer;
 import com.simple.banking.simple_banking.service.CustomerService;
 import com.simple.banking.simple_banking.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/api")
@@ -30,5 +32,9 @@ public class CustomerController {
     @PutMapping("/update/{id}")
     public Map<String, Object> updateData (@PathVariable("id")int id ,@RequestBody CustomerDto CustomerDto){
         return customerService.updateData(id, CustomerDto);
+    }
+    @GetMapping("/findAll")
+    public List<Customer> findAll (){
+        return customerService.findAll();
     }
 }

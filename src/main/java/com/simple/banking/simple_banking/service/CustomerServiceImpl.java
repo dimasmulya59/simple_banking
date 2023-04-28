@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -108,6 +109,11 @@ public class CustomerServiceImpl implements CustomerService{
             result.put("status", "failed");
             result.put("message", "Gagal transfer");
             return result;
+
         }
+    }
+    @Override
+    public List<Customer> findAll(){
+      return customerRepository.findAll();
     }
 }

@@ -2,7 +2,9 @@ package com.simple.banking.simple_banking.service;
 
 import com.simple.banking.simple_banking.dto.CustomerDto;
 import com.simple.banking.simple_banking.dto.TransferRequest;
+import com.simple.banking.simple_banking.model.Customer;
 
+import java.util.List;
 import java.util.Map;
 
 public interface CustomerService {
@@ -12,4 +14,5 @@ public interface CustomerService {
 
     Map<String,Object> transferSaldo(TransferRequest transferRequest);
 
+    List<Customer> findAll();
 }
