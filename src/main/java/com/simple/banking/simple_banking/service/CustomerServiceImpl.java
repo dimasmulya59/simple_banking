@@ -116,4 +116,21 @@ public class CustomerServiceImpl implements CustomerService{
     public List<Customer> findAll(){
       return customerRepository.findAll();
     }
+
+    @Override
+    public Map<String,Object>updateSaldo(int id, CustomerDto customerDto){
+        var UpdateCustomer = customerRepository.findById(id);
+        Map<String , Object> result = new HashMap<>();
+        if (UpdateCustomer.get()== null){
+            result.put("Id tidak ditemukan", UpdateCustomer.get().getId());
+            return result;
+        }
+        UpdateCustomer.get().setSaldo(UpdateCustomer.get().getSaldo() + customerDto.getSaldo());
+        result.put("Succes" , HttpStatus.OK);
+        result.put("Massage","Saldo di tambahkan menjadi" + UpdateCustomer.get().getSaldo());
+        customerRepository.save(UpdateCustomer.get());
+        return result;
+    }
+
+
 }

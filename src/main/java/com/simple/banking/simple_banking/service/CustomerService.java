@@ -15,4 +15,6 @@ public interface CustomerService {
     Map<String,Object> transferSaldo(TransferRequest transferRequest);
 
     List<Customer> findAll();
+
+    Map<String,Object>updateSaldo(int id, CustomerDto customerDto);
 }

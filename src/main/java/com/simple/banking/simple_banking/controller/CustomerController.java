@@ -37,4 +37,8 @@ public class CustomerController {
     public List<Customer> findAll (){
         return customerService.findAll();
     }
+    @PutMapping("/updatesaldo/{id}")
+    public Map<String,Object > updateSaldo (@PathVariable("id")int id ,@RequestBody CustomerDto CustomerDto) {
+        return customerService.updateSaldo(id, CustomerDto);
+    }
 }
